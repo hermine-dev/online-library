@@ -20,6 +20,7 @@ import 'bootstrap-social/bootstrap-social.css';
 
 import App from './views/App';
 import Home from './views/Home';
+import BookDetails from './views/BookDetails';
 import Auth from './views/Auth';
 
 const router = new VueRouter({
@@ -29,6 +30,14 @@ const router = new VueRouter({
             path: '/',
             name: 'home',
             component: Home,
+            meta: {
+                auth: true // A protected route
+            },
+        },
+        {
+            path: '/book/details',
+            name: 'book.details',
+            component: BookDetails,
             meta: {
                 auth: true // A protected route
             },
@@ -59,6 +68,7 @@ router.beforeEach((to, from, next) => {
                 next();
             }
         }
+        next();
     } else {
         next();
     }

@@ -10,7 +10,7 @@ class BooksController extends Controller
 {
     public function search(Request $request)
     {
-        if (empty($request->q) || empty($request->q['searchType'])) {
+        if (empty($request->q) || !isset($request->q['searchType'])) {
             return response()->json(['status' => false, 'books' => ['message' => 'Invalid search details']]);
         }
 

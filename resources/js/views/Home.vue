@@ -47,7 +47,7 @@
         <div class="books" v-if="booksData.docs">
             <h3>Total Items: <strong>{{booksData.numFound}}</strong></h3>
             <div v-for="book in booksData.docs" :key="book.key" class="book-item">
-                <div>Title: <strong>{{book.title}}</strong></div>
+                <div class="need-pointer" @click="selectBook(book)">Title: <strong>{{book.title}}</strong></div>
                 <div v-if="book.subtitle">
                     <p>SubTitle: <strong>{{book.subtitle}}</strong></p>
                 </div>
@@ -130,6 +130,14 @@ export default {
             this.numFound = 0;
             this.currentPage = 1;
             this.searchType = undefined;
+        },
+        selectBook (book) {
+            this.$store.dispatch('books/details', {book: book})
+                .then((res) => {
+                    localStorage.setItem('bookDetails', JSON.stringify(res));
+                    this.$router.push({name: 'book.details'});
+                })
+                .catch(console.error)
         }
     },
     watch: {
@@ -142,5 +150,8 @@ export default {
 <style>
     .book-item{
         margin-bottom: 10px;
+    }
+    .need-pointer{
+        cursor: pointer;
     }
 </style>
