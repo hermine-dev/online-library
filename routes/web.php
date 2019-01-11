@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/redirect', 'SpaController@redirectToProvider');
+Route::get('/callback', 'SpaController@handleProviderCallback');
+
+Route::get('/{any}', 'SpaController@index')->where('any', '.*');
