@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h1>Online Library</h1>
-
         <menu-component></menu-component>
 
         <div class="container">
