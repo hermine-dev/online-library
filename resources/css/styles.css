@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900');
 body {
     font-family: 'Nunito', sans-serif;
+    background: #f3f6fb;
 }
 /* ---- Header ---- */
 header {
+    position: relative;
     background: #fff;
     border-bottom: 1px solid #eee;
     box-shadow: 0 0 65px rgba(0,0,0,.09);
@@ -20,6 +22,12 @@ header .top-info {
 
 header .logout-btn {
     width: 30px;
+    opacity: .4;
+    transition: .3s;
+}
+
+header .logout-btn:hover {
+    opacity: 1
 }
 
 header .top-info .full-name {
@@ -30,6 +38,8 @@ header .top-info .full-name {
 header .top-info .full-name {
     font-size: 17px;
     font-weight: 600;
+    line-height: 1;
+    margin-top: 7.5px;
 }
 
 header .top-info .top-email {
@@ -38,7 +48,79 @@ header .top-info .top-email {
     color: #999
 }
 
+
+/*---- Top Section ----*/
+.top-section {
+    height: 500px;
+    background-image: linear-gradient(to bottom right, #1D976C, #93F9B9);
+}
+
+.search-area {
+    background: #fff;
+    -webkit-box-shadow: 0 4px 80px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 80px rgba(0,0,0,0.15);
+    padding: 30px;
+    margin-top: -380px;
+}
+
+.inp-group input {
+    border: 1px solid #eee;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 26px 15px;
+}
+
+.inp-group input::placeholder {
+    color: #999;
+}
+
+.inp-group input:focus{
+    border-color: rgba(28, 151, 108, 0.25);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(28, 151, 108, 0.25);
+}
+
+.inp-group button {
+    width: 250px;
+    border: none;
+    background-image: linear-gradient(to bottom right, #2bd89b, #1D976C);
+    font-weight: 600;
+    color: #fff;
+    transition: .3s;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 15px;
+}
+
+.inp-group button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 10px 35px 0px rgba(28, 151, 108, 0.5);
+}
+
+.row-custom {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -7.5px;
+    margin-left: -7.5px;
+}
+
+.book-item {
+    background: #eee;
+    border-radius: 5px;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.book-one {
+    margin: 15px;
+}
+
+
 /* ---- Defaults ---- */
 p {
     margin: 0;
+}
+
+a {
+    color: #1D976C
 }

@@ -2,7 +2,7 @@
     <div>
         <menu-component></menu-component>
 
-        <div class="container">
+        <div>
             <router-view></router-view>
         </div>
     </div>

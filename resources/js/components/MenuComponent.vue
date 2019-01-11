@@ -3,14 +3,13 @@
         <b-container>
             <b-row>
                 <b-col lg="4" md="4" sm="4" cols="12">
-                    <h1>Online Library</h1>
+                    <h1> <router-link :to="{ name: 'home' }">Online Library</router-link></h1>
                 </b-col>
                 <b-col lg="4" md="4" sm="4" cols="12">
-                    <router-link :to="{ name: 'home' }">Home</router-link>
+
                 </b-col>
                 <b-col lg="4" md="4" sm="4" cols="12">
                     <div v-if="loggedUserData && loggedUserData.id">
-                        <!--<p>Logged As</p>-->
                         <div class="top-info">
                             <b-row class="no-gutters">
                                 <b-col lg="3" class="text-center">
@@ -20,7 +19,7 @@
                                     <p class="full-name">{{loggedUserData.name}}</p>
                                     <p class="top-email">{{loggedUserData.email}}</p>
                                 </b-col>
-                                <b-col lg="1">
+                                <b-col lg="1" class="d-flex align-items-center">
                                     <router-link :to="{ name: 'auth.login' }" v-if="loggedUserData === null || loggedUserData.id === undefined">Login</router-link>
                                     <router-link :to="{ name: 'auth.logout' }" v-else><img src="../../img/icons/logout.png" class="logout-btn" alt=""></router-link>
                                 </b-col>
