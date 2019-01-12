@@ -1,52 +1,65 @@
 <template>
     <div>
-        <div class="top-section">
-
-        </div>
-        <b-container>
+        <div class="top-section"></div>
+        <b-container class="w-800">
             <div class="search-area">
-                <h3>Search ...</h3>
                 <b-tabs>
                     <b-tab title="Search" active @click="tabChanged">
                         <div class="form-group inp-group d-flex mt-3">
                             <input type="text" placeholder="Search for Books ..." class="form-control" id="q" v-model="searchData.q">
-                            <button type="button" @click="searchBook(0)" :disabled="loading">Search</button>
+                            <button type="button" @click="searchBook(0)" :disabled="loading"><img src="../../img/icons/search.png" class="search-icon" alt=""></button>
                         </div>
                     </b-tab>
                     <b-tab title="Advanced Search" @click="tabChanged">
                         <div class="form-group inp-group d-flex mt-3">
                             <input type="text" placeholder="Author" class="form-control mr-3" id="title" v-model="searchData.title">
                             <input type="text" placeholder="Title" class="form-control" id="author" v-model="searchData.author">
-                            <button type="button" @click="searchBook(1)" :disabled="loading">Search</button>
+                            <button type="button" @click="searchBook(1)" :disabled="loading" class="w-118"><img src="../../img/icons/search.png" class="search-icon" alt=""></button>
                         </div>
                     </b-tab>
                     <b-tab title="ISBN Search" @click="tabChanged">
                         <div class="form-group inp-group d-flex mt-3">
                             <input type="text" placeholder="ISBN" class="form-control" id="isbn" v-model="searchData.isbn">
-                            <button type="button" @click="searchBook(2)" :disabled="loading">Search</button>
+                            <button type="button" @click="searchBook(2)" :disabled="loading"><img src="../../img/icons/search.png" class="search-icon" alt=""></button>
                         </div>
                     </b-tab>
                 </b-tabs>
 
-                <div class="alert alert-primary" role="alert" v-if="loading">
-                    Loading...
-                </div>
+                <!--Loader-->
+                <transition name="slide-fade">
+                    <div class="bookshelf_wrapper" v-if="loading">
+                        <ul class="books_list">
+                            <li class="book_item first"></li>
+                            <li class="book_item second"></li>
+                            <li class="book_item third"></li>
+                            <li class="book_item fourth"></li>
+                            <li class="book_item fifth"></li>
+                            <li class="book_item sixth"></li>
+                        </ul>
+                        <div class="shelf"></div>
+                    </div>
+                </transition>
+
                 <div v-if="isbnData && isbnData.bib_key">
                     <h3>{{isbnData.bib_key}}</h3>
                     <p><a :href="isbnData.info_url" target="_blank"><img :src="isbnData.thumbnail_url" alt="avatar"></a></p>
                 </div>
-
-                <div class="books " v-if="booksData.docs">
-                    <h3>Total Items: <strong>{{booksData.numFound}}</strong></h3>
-                    <div class="row-custom">
-                        <div v-for="book in booksData.docs" :key="book.key" class="book-item">
-                            <div class="book-one">
-                                <div class="need-pointer" @click="selectBook(book)">Title: <strong>{{book.title}}</strong></div>
+            </div>
+        </b-container>
+        <b-container>
+            <div class="main-block" id="books" v-if="booksData.docs">
+                <div class="books">
+                    <h3 class="total-items">Total Items: <strong>{{booksData.numFound}}</strong></h3>
+                    <div class="row">
+                        <div v-for="book in booksData.docs" :key="book.key" class="col-lg-12-5 custom-col-md-4 custom-col-sm-3 custom-col-6">
+                            <div class="book-item book-one">
+                                <img src="../../img/book-placeholder.png" alt="">
+                                <div class="need-pointer book-title" @click="selectBook(book)"><!--Title:--> {{book.title}}</div>
                                 <div v-if="book.subtitle">
-                                    <p>SubTitle: <strong>{{book.subtitle}}</strong></p>
+                                    <p><!--SubTitle:--> <strong>{{book.subtitle}}</strong></p>
                                 </div>
                                 <div v-if="book.author_name">
-                                    <p>Authors: <strong>{{book.author_name.join()}}</strong></p>
+                                    <p class="book-author"><!--Authors:--> {{book.author_name.join()}}</p>
                                 </div>
                                 <div v-if="book.edition_count">
                                     <p><strong>{{book.edition_count}}</strong> editions </p>
@@ -57,11 +70,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="alert alert-primary" role="alert" v-if="loading">
-                        Loading...
-                    </div>
 
-                    <b-pagination align="center" size="md" :total-rows="numFound" v-model="currentPage" :per-page="100">
+                    <b-pagination align="center" size="md" :total-rows="numFound" v-model="currentPage" :per-page="100"  v-scroll-to="'#header'">
                     </b-pagination>
                 </div>
             </div>
@@ -150,5 +160,23 @@ export default {
     }
     .need-pointer{
         cursor: pointer;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
+
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+        transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+        /* .slide-fade-leave-active below version 2.1.8 */ {
+        transform: translateX(10px);
+        opacity: 0;
     }
 </style>

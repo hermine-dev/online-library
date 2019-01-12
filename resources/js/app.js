@@ -10,9 +10,24 @@ import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import VueRouter from 'vue-router';
 import store from './store'
+import VueScrollTo from 'vue-scrollto';
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
+Vue.use(VueScrollTo, {
+    container: "body",
+    duration: 500,
+    easing: "ease",
+    offset: 0,
+    force: true,
+    cancelable: true,
+    onStart: false,
+    onDone: false,
+    onCancel: false,
+    x: false,
+    y: true
+})
+
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
